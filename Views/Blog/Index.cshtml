@@ -1,0 +1,29 @@
+﻿@model List<Blog_April.Models.Post>
+
+@{
+    ViewData["Title"] = "All Blog Posts";
+}
+
+<h1>All Blog Posts</h1>
+
+<a asp-action="Create" class="btn btn-primary mb-3">+ New Post</a>
+
+@foreach (var post in Model)
+{
+    <div class="card mb-3">
+        <div class="card-body">
+            <h4 class="card-title">@post.Title</h4>
+            <p class="card-text">@post.Content</p>
+            <small class="text-muted">Posted on @post.CreatedAt.ToString("g")</small>
+            <div>
+                <a asp-action="Details" asp-route-id="@post.Id" class="btn btn-sm btn-outline-primary mt-2">Read More</a>
+            </div>
+            @if (post.AuthorId == User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value)
+            {
+                <a asp-action="Edit" asp-route-id="@post.Id" class="btn btn-sm btn-warning me-2">Edit</a>
+                <a asp-action="Delete" asp-route-id="@post.Id" class="btn btn-sm btn-danger">Delete</a>
+            }
+
+        </div>
+    </div>
+}

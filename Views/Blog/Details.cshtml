@@ -1,0 +1,16 @@
+﻿@model Blog_April.Models.Post
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<h2>@Model.Title</h2>
+
+<p class="text-muted">
+    Posted on @Model.CreatedAt.ToString("MMMM dd, yyyy")
+</p>
+
+<div class="mb-4">
+    @Html.Raw(Model.Content.Replace("\n", "<br />"))
+</div>
+
+<a asp-action="Index" class="btn btn-outline-primary">Back to Posts</a>
